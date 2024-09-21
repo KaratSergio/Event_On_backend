@@ -16,17 +16,19 @@ export const registerParticipant = ctrlWrapper(async (req, res) => {
     birthday,
     source,
     eventId,
+    registrationDate: new Date(),
   });
+
   await participant.save();
 
-  res.status(201).json({ message: "Registration successful!" });
+  res.status(201).json({ message: "Registration successful!", participant });
 });
 
 export const getParticipantsByEvent = ctrlWrapper(async (req, res) => {
   const { eventId } = req.params;
 
   const participants = await Participant.find({ eventId }).select(
-    "fullName email"
+    "fullName email registrationDate"
   );
 
   if (!participants || participants.length === 0) {

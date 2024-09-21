@@ -23,6 +23,10 @@ const participantSchema = new mongoose.Schema({
     ref: "Event",
     required: true,
   },
+  registrationDate: {
+    type: Date,
+    required: true,
+  },
 });
 
 const Participant = mongoose.model("Participant", participantSchema);
